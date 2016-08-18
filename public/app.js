@@ -1,16 +1,13 @@
 angular.module('s3Demo', [])
-.directive('fileRead', function() {
+.directive('fileRead', function(dataService) {
   return {
     restrict: 'A',
-    controller: function($scope, dataService) {
-      $scope.storeImage = dataService.storeImage;
-    },
     link: function(scope, elem, attrs) {
       elem.bind('change', function(changeEvent) {
         var reader = new FileReader();
         reader.onload = function(loadEvent) {
           var fileread = loadEvent.target.result;
-          scope.storeImage(fileread, 'test');
+          dataService.storeImage(fileread, 'test');
         }
 
         // Convert image into base64
